@@ -2,10 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'EGER';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block;
+  src: url(/src/fonts/EGER-Regular.otf) format('otf');
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --border-radius: 30px;
+  --section-heights: 800px;
+  --placeholder-background: rgba(242, 242, 242, 0.5);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,12 +29,8 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(171,6,87);
+  background: linear-gradient(180deg, rgba(171,6,87,1) 0%, rgba(142,11,78,1) 2%, rgba(103,18,66,1) 7%, rgba(74,23,57,1) 17%, rgba(35,30,45,1) 54%, rgba(34,31,45,1) 100%);
 }
 
 @layer utilities {
@@ -31,3 +38,136 @@ body {
     text-wrap: balance;
   }
 }
+
+section {
+  flex-direction: column;
+  padding: 50px 100px;
+  text-align: center;
+}
+
+section h1 {
+  font-family: 'EGER', sans-serif;
+  letter-spacing: 0.25rem;
+  font-size: 96px;
+  line-height: 1;
+}
+
+section h2 {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+section p {
+  width: 580px;
+  text-align: center;
+}
+
+.hero-section {
+  height: 700px;
+}
+
+.about-section {
+  height: var(--section-heights);
+}
+
+.events-section {
+  height: var(--section-heights);
+}
+
+.hero-card {
+  flex-direction: column;
+  gap: 90px;
+  background-color: var(--placeholder-background);
+  border-radius: var(--border-radius);
+  padding: 50px 0;
+  align-items: center;
+}
+
+.leading {
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+}
+
+.team-section {
+  height: 800px;
+}
+
+.events-link {
+  height: 700px;
+  width: 100%;
+  padding: 50px;
+}
+
+  @layer base {
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 222.2 84% 4.9%;
+
+      --card: 0 0% 100%;
+      --card-foreground: 222.2 84% 4.9%;
+
+      --popover: 0 0% 100%;
+      --popover-foreground: 222.2 84% 4.9%;
+
+      --primary: 222.2 47.4% 11.2%;
+      --primary-foreground: 210 40% 98%;
+
+      --secondary: 210 40% 96.1%;
+      --secondary-foreground: 222.2 47.4% 11.2%;
+
+      --muted: 210 40% 96.1%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+
+      --accent: 210 40% 96.1%;
+      --accent-foreground: 222.2 47.4% 11.2%;
+
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 210 40% 98%;
+
+      --border: 214.3 31.8% 91.4%;
+      --input: 214.3 31.8% 91.4%;
+      --ring: 222.2 84% 4.9%;
+
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      --background: 222.2 84% 4.9%;
+      --foreground: 210 40% 98%;
+
+      --card: 222.2 84% 4.9%;
+      --card-foreground: 210 40% 98%;
+
+      --popover: 222.2 84% 4.9%;
+      --popover-foreground: 210 40% 98%;
+
+      --primary: 210 40% 98%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+
+      --secondary: 217.2 32.6% 17.5%;
+      --secondary-foreground: 210 40% 98%;
+
+      --muted: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+
+      --accent: 217.2 32.6% 17.5%;
+      --accent-foreground: 210 40% 98%;
+
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 210 40% 98%;
+
+      --border: 217.2 32.6% 17.5%;
+      --input: 217.2 32.6% 17.5%;
+      --ring: 212.7 26.8% 83.9%;
+    }
+  }
+
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
+  }
