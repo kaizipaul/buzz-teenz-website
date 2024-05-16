@@ -26,6 +26,24 @@ export default function Events () {
        <h2>
          All Events.
        </h2>
+       <div class="grid grid-rows-4 grid-flow-col gap-2 h-[400px]">
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+          <div className="border-solid border-2"></div>
+        </div>
      </div>
     </section>
     </>

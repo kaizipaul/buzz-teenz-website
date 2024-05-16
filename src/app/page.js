@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { BiLinkExternal } from "react-icons/bi";
+import { FaBookOpen } from "react-icons/fa6";
+import { TbFileMusic } from "react-icons/tb";
+import { IoBulb } from "react-icons/io5";
 
 export default function Home() {
   return (
@@ -28,15 +31,21 @@ export default function Home() {
         Lorem ipsum dolor sit amet aliquyam takimata vel. Et ipsum ad. Erat sit erat et ipsum amet in rebum. Elitr vero sanctus magna id rebum dolores lorem option in consetetur sit duo amet diam augue.
         </p>
       </div>
-      <div className="about-cards flex gap-2 h-[380px] justify-center">
-        <div className="border-solid border-2 w-[30%]">
-
+      <div className="flex gap-4 h-[300px] justify-center">
+        <div className="about-cards rounded-lg flex flex-col justify-evenly gap-8 w-[30%] px-[20px] py-[30px] about-cards">
+          <FaBookOpen className="text-[50px]" />
+          <p className="text-left font-bold">Educate</p>
+          <p className="text-left w-[90%]">Eum euismod eu dolore diam kasd ea et duo clita veniam dolores</p>
         </div>
-        <div className="border-solid border-2 w-[30%]">
-
+        <div className="about-cards rounded-lg flex flex-col justify-evenly gap-8 w-[30%] px-[20px] py-[30px] about-cards">
+          <TbFileMusic className="text-[50px]" />
+          <p className="text-left font-bold">Entertain</p>
+          <p className="text-left w-[90%]">Eum euismod eu dolore diam kasd ea et duo clita veniam dolores</p>
         </div>
-        <div className="border-solid border-2 w-[30%]">
-
+        <div className="about-cards rounded-lg flex flex-col justify-evenly gap-8 w-[30%] px-[20px] py-[30px] about-cards">
+          <IoBulb className="text-[50px]" />
+          <p className="text-left font-bold">Inspire</p>
+          <p className="text-left w-[90%]">Eum euismod eu dolore diam kasd ea et duo clita veniam dolores</p>
         </div>
       </div>
       </div>
