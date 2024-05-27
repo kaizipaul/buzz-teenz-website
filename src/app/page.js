@@ -3,6 +3,7 @@ import { BiLinkExternal } from "react-icons/bi";
 import { FaBookOpen } from "react-icons/fa6";
 import { TbFileMusic } from "react-icons/tb";
 import { IoBulb } from "react-icons/io5";
+import MainCard from "@/components/eventcards/maincard";
 
 export default function Home() {
   return (
@@ -56,10 +57,31 @@ export default function Home() {
         See what we’ve been cookin up,<br />
         and what’s to come.
         </h2>
-        <div class="grid grid-rows-2 grid-flow-col gap-2 h-[400px]">
-          <div className="row-span-2 border-solid border-2"></div>
-          <div className="border-solid border-2"></div>
-          <div className="border-solid border-2"></div> 
+        <div class="grid grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
+          <div className="row-span-2">
+          <MainCard
+            tag={'The Finals'}
+            title={'The Finals'}
+            location={'JNICC, Dar-es-Salaam'}
+            date={'19 June 2024, 1pm'}
+            />
+          </div>
+          <div>
+          <MainCard
+            tag={'The Finals'}
+            title={'The Finals'}
+            location={'JNICC, Dar-es-Salaam'}
+            date={'19 June 2024, 1pm'}
+            />
+          </div>
+          <div>
+          <MainCard
+            tag={'The Finals'}
+            title={'The Finals'}
+            location={'JNICC, Dar-es-Salaam'}
+            date={'19 June 2024, 1pm'}
+            />
+            </div> 
         </div>
       </div>
     </section>
