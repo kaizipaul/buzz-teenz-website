@@ -11,7 +11,7 @@ export default function About () {
       BUZZ TEENZ TANZANIA
      </h1>
     </div>
-     <p>
+     <p className="w-[500px]">
      Lorem ipsum dolor sit amet eu sanctus et eu takimata vero et enim et labore accusam rebum et eirmod. Aliquyam sit diam consetetur diam amet commodo. Consetetur invidunt qui quod sanctus. Cum vero voluptua voluptua tempor diam odio. Elitr ipsum dolor. Rebum lorem takimata ipsum ex quod vero augue amet in aliquam sit et rebum labore. Sed consetetur accusam. 
      </p>
     </div>

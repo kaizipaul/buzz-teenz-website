@@ -14,7 +14,7 @@ export default function Home() {
           CREATING EXCITING <br />
           EXPERIENCES
         </h1>
-        <p>
+        <p className="w-[500px]">
         Lorem ipsum dolor sit amet stet. Ea consectetuer ipsum nonumy rebum autem consequat sit erat gubergren facilisis sit nibh magna.
         </p>
         <Button variant="outline" className="dark">Vote Now
@@ -28,7 +28,7 @@ export default function Home() {
         <h2>
           About Us.
         </h2>
-        <p>
+        <p className="w-[500px]">
         Lorem ipsum dolor sit amet aliquyam takimata vel. Et ipsum ad. Erat sit erat et ipsum amet in rebum. Elitr vero sanctus magna id rebum dolores lorem option in consetetur sit duo amet diam augue.
         </p>
       </div>
