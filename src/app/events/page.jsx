@@ -6,13 +6,26 @@ import fetchEvents from '../helpers/fetchEvents';
 
 
 export default function Events () {
+  const [featuredEvents, setFeaturedEvents] = useState([]);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetchEvents()
-    .then(setEvents)
+    const getData = async () => {
+      try {
+        const featured = await fetchEvents('filters[isFeatured][$eq]=true');
+        const nonFeatured = await fetchEvents('filters[isFeatured][$eq]=false');
+        
+        setFeaturedEvents(featured);
+        setEvents(nonFeatured);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    getData();
   }, [])
 
+  const nonFeaturedTop = events.slice(0, 2);
 
   return (
     <>
@@ -32,29 +45,29 @@ export default function Events () {
     <section>
     <div className="grid grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
           <div className="row-span-2">
+            {featuredEvents.map(featuredEvent => (
+              <MainCard
+              key={featuredEvent.id}
+              tag={featuredEvent.attributes.tags}
+              title={featuredEvent.attributes.title}
+              location={featuredEvent.attributes.location}
+              thumbnail={`http://localhost:1337${featuredEvent.attributes.coverimage.data.attributes.url}`}
+              link={`events/${featuredEvent.attributes.slug}`}
+              date={'19 June 2024, 1pm'}
+              />
+            ))}
+            </div>
+          {nonFeaturedTop.map((event, index) => (
             <MainCard
-            tag={'The Finals'}
-            title={'The Finals'}
-            location={'JNICC, Dar-es-Salaam'}
+            key={index}
+            tag={event.attributes.tags}
+            title={event.attributes.title}
+            location={event.attributes.location}
+            thumbnail={`http://localhost:1337${event.attributes.coverimage.data.attributes.url}`}
+            link={`events/${event.attributes.slug}`}
             date={'19 June 2024, 1pm'}
             />
-          </div>
-          <div>
-          <MainCard
-            tag={'The Finals'}
-            title={'The Finals'}
-            location={'JNICC, Dar-es-Salaam'}
-            date={'19 June 2024, 1pm'}
-            />
-          </div>
-          <div>
-          <MainCard
-            tag={'The Finals'}
-            title={'The Finals'}
-            location={'JNICC, Dar-es-Salaam'}
-            date={'19 June 2024, 1pm'}
-            />
-            </div> 
+          ))}
         </div>
     </section>
     <section>

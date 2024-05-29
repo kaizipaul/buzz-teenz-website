@@ -5,12 +5,26 @@ import MainStory from '@/components/blogcards/mainstory';
 import fetchBlogPosts from '../helpers/fetchBlogs';
 
 const Blog = () => {
+ const [featuredBlogs, setFeaturedBlogs] = useState([]);
  const [blogs, setBlogs] = useState([]);
 
  useEffect (() => {
-  fetchBlogPosts()
-  .then(setBlogs)
+  const getData = async () => {
+    try {
+      const featured = await fetchBlogPosts('filters[isFeatured][$eq]=true');
+      const nonFeatured = await fetchBlogPosts('filters[isFeatured][$eq]=false');
+      
+      setFeaturedBlogs(featured);
+      setBlogs(nonFeatured);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  getData();
  }, [])
+
+ const nonFeaturedTop = blogs.slice(0, 2);
 
   return (
     <>
@@ -29,37 +43,30 @@ const Blog = () => {
    </section>
    <section>
    <div class="grid grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
-    {/* {featuredBlogs.data.map (featuredBlog => {
-      <MainStory 
-      key={featuredBlog.id}
-      title={featuredBlog.attributes.title}
-      author={featuredBlog.attributes.author}
-      />
-    })} */}
           <div className="row-span-2">
+            {featuredBlogs.map(featuredBlog => (
+              <MainStory
+              key={featuredBlog.id}
+              thumbnail={`http://localhost:1337${featuredBlog.attributes.thumbnail.data.attributes.url}`}
+              title={featuredBlog.attributes.title}
+              author={'Marcus Johnson'}
+              date={'24 Dec 2024'}
+              tag={featuredBlog.attributes.tags}
+              link={`blog/${featuredBlog.attributes.slug}`}
+              />
+            ))}
+          </div>
+          {nonFeaturedTop.map((blog,index) => (
             <MainStory
-            title={'This is Teen Buzz'}
+            key={index}
+            thumbnail={`http://localhost:1337${blog.attributes.thumbnail.data.attributes.url}`}
+            title={blog.attributes.title}
             author={'Marcus Johnson'}
             date={'24 Dec 2024'}
-            tag={'The Finals'}
+            tag={blog.attributes.tags}
+            link={`blog/${blog.attributes.slug}`}
             />
-          </div>
-          <div>
-          <MainStory
-            title={'This is Teen Buzz'}
-            author={'Marcus Johnson'}
-            date={'24 Dec 2024'}
-            tag={'The Finals'}
-            />
-          </div>
-          <div>
-          <MainStory
-            title={'This is Teen Buzz'}
-            author={'Marcus Johnson'}
-            date={'24 Dec 2024'}
-            tag={'The Finals'}
-            />
-            </div> 
+          ))}
         </div>
    </section>
    <section>
