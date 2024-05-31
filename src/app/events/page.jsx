@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import AllEventsCard from '@/components/eventcards/allevents';
 import MainCard from '@/components/eventcards/maincard';
 import fetchEvents from '../helpers/fetchEvents';
+import { formatDate } from '../helpers/convertDate';
 
 
 export default function Events () {
@@ -30,7 +31,7 @@ export default function Events () {
   return (
     <>
     <section>
-     <div className="flex flex-col gap-8 items-center">
+     <div className="flex flex-col gap-4 sm:gap-8 items-center">
       <h2>
        Events.
       </h2>
@@ -43,7 +44,7 @@ export default function Events () {
      </div>
     </section>
     <section>
-    <div className="grid grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
+    <div className="grid grid-rows-4 h-[90%] text-left sm:grid-rows-2 grid-flow-col gap-2 h-[400px]">
           <div className="row-span-2">
             {featuredEvents.map(featuredEvent => (
               <MainCard
@@ -82,7 +83,7 @@ export default function Events () {
             name={event.attributes.title}
             thumbnail={`http://localhost:1337${event.attributes.coverimage.data.attributes.url}`}
             location={event.attributes.location}
-            date={event.attributes.date}
+            date={formatDate(event.attributes.date)}
             tag={event.attributes.tags}
             link={`events/${event.attributes.slug}`}
             />
