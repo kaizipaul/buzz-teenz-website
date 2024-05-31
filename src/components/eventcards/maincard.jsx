@@ -1,6 +1,7 @@
 // components/Card.js
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaLocationDot, FaClock } from "react-icons/fa6";
 
 const MainCard = ({ title, location, date, thumbnail, tag, link }) => {
   const backgroundImage = { 
@@ -30,14 +31,15 @@ const MainCard = ({ title, location, date, thumbnail, tag, link }) => {
       padding: '20px'
     },
     tag: {
-      backgroundColor: '#000',
-      color: '#fff',
+      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+      color: '#000',
+      fontWeight: '700',
       padding: '5px 10px',
       borderRadius: '15px',
       display: 'inline-block',
       fontSize: '12px',
       marginBottom: '10px',
-      width: '80px',
+      width: 'fit-content',
     },
     readTime: {
       fontSize: '12px',
@@ -53,23 +55,24 @@ const MainCard = ({ title, location, date, thumbnail, tag, link }) => {
       display: 'flex',
       alignItems: 'center'
     },
-    avatar: {
-      width: '40px',
-      height: '40px',
-      borderRadius: '50%',
-      marginRight: '10px'
-    },
     authorInfo: {
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      gap: '8px',
     },
     authorName: {
       fontSize: '14px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      display: 'inline-flex',
+      gap: '4px',
+      alignItems: 'center'
     },
     date: {
       fontSize: '12px',
-      color: '#999'
+      color: '#999',
+      display: 'inline-flex',
+      gap: '4px',
+      alignItems: 'center',
     }
    };
 
@@ -86,10 +89,15 @@ const MainCard = ({ title, location, date, thumbnail, tag, link }) => {
         <div style={styles.tag}>{tag}</div>
         <div style={styles.title}>{title}</div>
         <div style={styles.authorSection}>
-          {/* <Image src={avatar} alt="author" className={styles.avatar} width={40} height={40} /> */}
           <div style={styles.authorInfo}>
-            <div style={styles.authorName}>{location}</div>
-            <div style={styles.date}>{date}</div>
+            <div style={styles.authorName}>
+            <FaLocationDot />
+              {location}
+              </div>
+            <div style={styles.date}>
+            <FaClock />
+              {date}
+              </div>
           </div>
         </div>
       </div>

@@ -9,3 +9,10 @@ nav ul {
  display: flex;
  gap: 10px;
 }
+
+@media (max-width: 480px) {
+ header {
+  padding: 20px 25px;
+ }
+
+}

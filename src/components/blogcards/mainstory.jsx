@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-const MainStory = ({ title, author, date, thumbnail, tag, link }) => {
+const MainStory = ({ title, author, date, thumbnail, tag, link, avatar }) => {
 
  const backgroundImage = { 
   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url(${thumbnail})`,
@@ -30,14 +30,15 @@ const MainStory = ({ title, author, date, thumbnail, tag, link }) => {
     padding: '20px'
   },
   tag: {
-    backgroundColor: '#000',
-    color: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    color: '#000',
+    fontWeight: '700',
     padding: '5px 10px',
     borderRadius: '15px',
     display: 'inline-block',
     fontSize: '12px',
     marginBottom: '10px',
-    width: '80px',
+    width: 'fit-content'
   },
   readTime: {
     fontSize: '12px',
@@ -45,9 +46,9 @@ const MainStory = ({ title, author, date, thumbnail, tag, link }) => {
     marginBottom: '10px'
   },
   title: {
-    fontSize: '18px',
+    fontSize: '20px',
     fontWeight: 'bold',
-    marginBottom: '15px'
+    marginBottom: '15px',
   },
   authorSection: {
     display: 'flex',
@@ -57,7 +58,8 @@ const MainStory = ({ title, author, date, thumbnail, tag, link }) => {
     width: '40px',
     height: '40px',
     borderRadius: '50%',
-    marginRight: '10px'
+    marginRight: '10px',
+    objectFit: 'cover',
   },
   authorInfo: {
     display: 'flex',
@@ -85,7 +87,7 @@ const MainStory = ({ title, author, date, thumbnail, tag, link }) => {
         <div style={styles.tag}>{tag}</div>
         <div style={styles.title}>{title}</div>
         <div style={styles.authorSection}>
-          {/* <Image src={avatar} alt="author" className={styles.avatar} width={40} height={40} /> */}
+          <Image src={avatar} alt="author" style={styles.avatar} width={40} height={40} className='ring-offset-2 ring ring-[#1789FC]' />
           <div style={styles.authorInfo}>
             <div style={styles.authorName}>{author}</div>
             <div style={styles.date}>{date}</div>

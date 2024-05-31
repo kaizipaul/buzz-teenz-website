@@ -8,7 +8,7 @@ export default function AllEventsCard({thumbnail, name, date, location, tag, lin
   <div style={styles.card}>
     <div style={styles.coverPhotoContainer}>
       {thumbnail ? (
-        <Image src={thumbnail} alt="cover" style={styles.coverPhoto} width={300} height={150} />
+        <Image src={thumbnail} alt="cover" style={styles.coverPhoto} width={400} height={150} />
       ) : (
         <div style={styles.coverPhotoPlaceholder} />
       )}
@@ -17,7 +17,6 @@ export default function AllEventsCard({thumbnail, name, date, location, tag, lin
       <div style={styles.tag}>{tag}</div>
       <div style={styles.title}>{name}</div>
       <div style={styles.authorSection}>
-        {/* <Image src={avatar} alt="author" style={styles.avatar} width={40} height={40} /> */}
         <div style={styles.authorInfo}>
           <div style={styles.location}>{location}</div>
           <div style={styles.date}>{date}</div>
