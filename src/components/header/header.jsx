@@ -20,7 +20,7 @@ export default function Header () {
      </Link>
      </h1>
     <nav>
-      <div className='bg-[#221F2D]/90 p-2 rounded-sm shadow-md text-lg'>
+      <div className='bg-[#221F2D]/90 p-2 rounded-sm shadow-md text-lg sm:hidden'>
       <Sheet>
   <SheetTrigger asChild>
   <RxHamburgerMenu />
