@@ -14,7 +14,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  --border-radius: 30px;
+  --border-radius: 20px;
   --section-heights: 800px;
   --placeholder-background: rgba(242, 242, 242, 0.5);
 }
@@ -181,5 +181,48 @@ section p {
     }
     body {
       @apply bg-background text-foreground;
+    }
+  }
+
+  @media (max-width: 768px) {
+    section {
+      padding: 30px;
+    }
+
+    .hero-card {
+      gap: 30px;
+      padding: 30px 10px;
+    }
+
+    .hero-section {
+      height: 700px;
+    }
+    
+    .events-section {
+      height: var(--section-heights);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    section {
+      padding: 15px;
+    }
+
+    .hero-card {
+      gap: 20px;
+      padding: 30px 10px;
+      height: 90%;
+    }
+
+    .hero-section {
+      height: 700px;
+    }
+    
+    .about-section {
+      height: 1250px;
+    }
+    
+    .events-section {
+      height: 1100px;
     }
   }
