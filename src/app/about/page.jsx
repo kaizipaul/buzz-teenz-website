@@ -1,3 +1,5 @@
+import { barlow_condensed } from "../fonts"
+
 export default function About () {
   return (
    <>
@@ -7,7 +9,7 @@ export default function About () {
      <h2>
       About Us.
      </h2>
-     <h1>
+     <h1 className={barlow_condensed.className} >
       BUZZ TEENZ TANZANIA
      </h1>
     </div>
