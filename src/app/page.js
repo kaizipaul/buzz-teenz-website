@@ -5,13 +5,14 @@ import { TbFileMusic } from "react-icons/tb";
 import { IoBulb } from "react-icons/io5";
 import MainCard from "@/components/eventcards/maincard";
 import Link from "next/link";
+import { barlow_condensed } from "./fonts";
 
 export default function Home() {
   return (
     <>
     <section className="hero-section flex">
       <div className="hero-card flex">
-        <h1>
+        <h1 className={barlow_condensed.className}>
           CREATING EXCITING <br />
           EXPERIENCES
         </h1>
@@ -61,13 +62,14 @@ export default function Home() {
         See what we’ve been cookin up,<br />
         and what’s to come.
         </h2>
-        <div class="grid grid-rows-4 h-[90%] sm:grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
+        <div className="grid grid-rows-4 h-[90%] sm:grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
           <div className="row-span-2">
           <MainCard
             tag={'The Finals'}
             title={'The Finals'}
             location={'JNICC, Dar-es-Salaam'}
             date={'19 June 2024, 1pm'}
+            link={'/events/the-finals'}
             />
           </div>
           <div>
@@ -76,6 +78,7 @@ export default function Home() {
             title={'The Finals'}
             location={'JNICC, Dar-es-Salaam'}
             date={'19 June 2024, 1pm'}
+            link={'/events/the-finals'}
             />
           </div>
           <div>
@@ -84,6 +87,7 @@ export default function Home() {
             title={'The Finals'}
             location={'JNICC, Dar-es-Salaam'}
             date={'19 June 2024, 1pm'}
+            link={'/events/the-finals'}
             />
             </div> 
         </div>
