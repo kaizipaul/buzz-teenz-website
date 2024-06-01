@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { formatFullDateTime } from '@/app/helpers/convertDate';
 import { Separator } from "@/components/ui/separator";
 import fetchEvents from '@/app/helpers/fetchEvents';
+import { barlow_condensed } from '@/app/fonts';
 
 export default function BlogPost(props) {
   const [event, setEvent] = useState([]);
@@ -30,7 +31,7 @@ export default function BlogPost(props) {
           <div className='flex flex-col gap-4 items-start'>
           <div className='-z-10 w-[100%]'>
               <Image
-              src={`http://localhost:1337${item.attributes.coverimage.data.attributes.url}`} 
+              src={`${item.attributes.coverimage.data.attributes.url}`} 
               alt='cover-image'
               width={800}
               height={500}
@@ -39,12 +40,12 @@ export default function BlogPost(props) {
               />
             </div>
             <div className='flex flex-col gap-2 relative top-[-55px] p-2'>
-            <h1>
+            <h1 className={barlow_condensed.className}>
               {item.attributes.title}
             </h1>
             <div className='inline-flex gap-2 items-center gap-4'>
             <Image
-              src={`http://localhost:1337${item.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
+              src={`${item.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
               alt='avatar'
               width={50}
               height={50}

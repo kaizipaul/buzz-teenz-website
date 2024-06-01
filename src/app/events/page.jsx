@@ -4,6 +4,7 @@ import AllEventsCard from '@/components/eventcards/allevents';
 import MainCard from '@/components/eventcards/maincard';
 import fetchEvents from '../helpers/fetchEvents';
 import { formatDate } from '../helpers/convertDate';
+import { barlow_condensed } from '../fonts';
 
 
 export default function Events () {
@@ -35,7 +36,7 @@ export default function Events () {
       <h2>
        Events.
       </h2>
-      <h1>
+      <h1 className={barlow_condensed.className} >
        FOLLOW THE BUZZ
       </h1>
       <p>
@@ -52,7 +53,7 @@ export default function Events () {
               tag={featuredEvent.attributes.tags}
               title={featuredEvent.attributes.title}
               location={featuredEvent.attributes.location}
-              thumbnail={`http://localhost:1337${featuredEvent.attributes.coverimage.data.attributes.url}`}
+              thumbnail={`${featuredEvent.attributes.coverimage.data.attributes.url}`}
               link={`events/${featuredEvent.attributes.slug}`}
               date={'19 June 2024, 1pm'}
               />
@@ -64,7 +65,7 @@ export default function Events () {
             tag={event.attributes.tags}
             title={event.attributes.title}
             location={event.attributes.location}
-            thumbnail={`http://localhost:1337${event.attributes.coverimage.data.attributes.url}`}
+            thumbnail={`${event.attributes.coverimage.data.attributes.url}`}
             link={`events/${event.attributes.slug}`}
             date={'19 June 2024, 1pm'}
             />
@@ -81,7 +82,7 @@ export default function Events () {
             <AllEventsCard 
             key={event.id}
             name={event.attributes.title}
-            thumbnail={`http://localhost:1337${event.attributes.coverimage.data.attributes.url}`}
+            thumbnail={`${event.attributes.coverimage.data.attributes.url}`}
             location={event.attributes.location}
             date={formatDate(event.attributes.date)}
             tag={event.attributes.tags}

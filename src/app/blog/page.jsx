@@ -4,6 +4,7 @@ import AllPosts from '@/components/blogcards/allposts';
 import MainStory from '@/components/blogcards/mainstory';
 import fetchBlogPosts from '../helpers/fetchBlogs';
 import { formatDate } from '../helpers/convertDate';
+import { barlow_condensed } from '../fonts';
 
 const Blog = () => {
  const [featuredBlogs, setFeaturedBlogs] = useState([]);
@@ -34,7 +35,7 @@ const Blog = () => {
      <h2>
       Blog.
      </h2>
-     <h1>
+     <h1 className={barlow_condensed.className} >
       READ FROM OUR TEAM
      </h1>
      <p>
@@ -48,11 +49,11 @@ const Blog = () => {
             {featuredBlogs.map(featuredBlog => (
               <MainStory
               key={featuredBlog.id}
-              thumbnail={`http://localhost:1337${featuredBlog.attributes.thumbnail.data.attributes.url}`}
+              thumbnail={`${featuredBlog.attributes.thumbnail.data.attributes.url}`}
               title={featuredBlog.attributes.title}
               author={featuredBlog.attributes.authors.data[0].attributes.name}
               date={formatDate(featuredBlog.attributes.createdAt)}
-              avatar={`http://localhost:1337${featuredBlog.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
+              avatar={`${featuredBlog.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
               tag={featuredBlog.attributes.tags}
               link={`blog/${featuredBlog.attributes.slug}`}
               />
@@ -61,12 +62,12 @@ const Blog = () => {
           {nonFeaturedTop.map((blog,index) => (
             <MainStory
             key={index}
-            thumbnail={`http://localhost:1337${blog.attributes.thumbnail.data.attributes.url}`}
+            thumbnail={`${blog.attributes.thumbnail.data.attributes.url}`}
             title={blog.attributes.title}
             author={blog.attributes.authors.data[0].attributes.name}
             date={formatDate(blog.attributes.createdAt)}
             tag={blog.attributes.tags}
-            avatar={`http://localhost:1337${blog.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
+            avatar={`${blog.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
             link={`blog/${blog.attributes.slug}`}
             />
           ))}
@@ -77,16 +78,16 @@ const Blog = () => {
       <h2>
         All Posts.
       </h2>
-      <div className="grid grid-rows-8 gap-4 h-[90%] sm:grid-cols-4 grid-flow-row h-[800px] text-left">
+      <div className="grid grid-rows-8 gap-4 h-[90%] sm:grid-cols-4 grid-flow-row text-left">
       {blogs.map(blog => (
        <AllPosts
        key={blog.id}
-       thumbnail={`http://localhost:1337${blog.attributes.thumbnail.data.attributes.url}`}
+       thumbnail={`${blog.attributes.thumbnail.data.attributes.url}`}
        title={blog.attributes.title}
        author={blog.attributes.authors.data[0].attributes.name}
        date={formatDate(blog.attributes.createdAt)}
        tag={blog.attributes.tags}
-       avatar={`http://localhost:1337${blog.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
+       avatar={`${blog.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
        link={`blog/${blog.attributes.slug}`}
        />
       ))}

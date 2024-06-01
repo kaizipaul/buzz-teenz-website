@@ -5,6 +5,7 @@ import fetchBlogPosts from '@/app/helpers/fetchBlogs';
 import { formatFullDateTime } from '@/app/helpers/convertDate';
 import { Separator } from "@/components/ui/separator"
 import Image from 'next/image';
+import { barlow_condensed } from '@/app/fonts';
 
 export default function BlogPost(props) {
   const [blog, setBlog] = useState([]);
@@ -28,7 +29,7 @@ export default function BlogPost(props) {
           <div key={post.id} className='flex flex-col items-start sm:gap-4'>
             <div className='-z-10 w-[100%]'>
               <Image 
-              src={`http://localhost:1337${post.attributes.thumbnail.data.attributes.url}`}
+              src={`${post.attributes.thumbnail.data.attributes.url}`}
               alt='cover-image'
               width={800}
               height={500}
@@ -37,12 +38,12 @@ export default function BlogPost(props) {
               />
             </div>
             <div className='flex flex-col gap-2 relative top-[-55px] p-2'>
-            <h1>
+            <h1 className={barlow_condensed.className}>
               {post.attributes.title}
             </h1>
             <div className="inline-flex items-center gap-4">
               <Image
-              src={`http://localhost:1337${post.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
+              src={`${post.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
               alt='avatar'
               width={50}
               height={50}
