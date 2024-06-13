@@ -1,5 +1,6 @@
 import './header.css';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
+import Image from 'next/image';
 import { RxHamburgerMenu } from "react-icons/rx";
 import {
   Sheet,
@@ -16,7 +17,12 @@ export default function Header () {
    <header>
     <h1>
      <Link href="/">
-     [buzz teenz]
+     <Image
+     src={'/Buzz.png'}
+     alt={'logo'}
+     height={100}
+     width={100}
+     />
      </Link>
      </h1>
     <nav>
@@ -25,9 +31,14 @@ export default function Header () {
   <SheetTrigger asChild>
   <RxHamburgerMenu />
   </SheetTrigger>
-  <SheetContent side={'top'} className='bg-[#221F2D]/90 dark backdrop-blur-md h-[90%] p-10'>
+  <SheetContent side={'top'} className='bg-[#221F2D]/90 dark backdrop-blur-md h-[90%] flex flex-col items-center p-10'>
     <SheetHeader>
-      <SheetTitle className='text-2xl'>[buzz teenz]</SheetTitle>
+        <Image
+        src={'/Buzz.png'}
+        alt='logo'
+        height={125}
+        width={150}
+        />
       <SheetDescription className='p-10'>
         <ul className='flex flex-col gap-4 text-xl'>
           <li>

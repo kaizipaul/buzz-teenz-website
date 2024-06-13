@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { Button } from '@/components/ui/button';
-import Link from "next/link";
+import { Link } from 'next-view-transitions';
 
 
 export default function AllEventsCard({thumbnail, name, date, location, tag, link}) {
@@ -35,7 +35,7 @@ export default function AllEventsCard({thumbnail, name, date, location, tag, lin
 const styles = {
 card: {
   width: '100%',
-  backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  backgroundColor: 'rgba(235, 212, 41, 0.7)',
   borderRadius: '10px',
   overflow: 'hidden',
 },
@@ -73,7 +73,7 @@ tag: {
 },
 location: {
   fontSize: '12px',
-  color: '#999',
+  color: '#fff',
   marginBottom: '10px',
 },
 title: {
@@ -102,6 +102,6 @@ authorName: {
 },
 date: {
   fontSize: '12px',
-  color: '#999',
+  color: '#fff',
 },
 };

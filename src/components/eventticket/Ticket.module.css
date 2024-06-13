@@ -1,0 +1,60 @@
+/* components/Ticket.module.css */
+
+.ticket {
+ width: 100%;
+ background-color: rgba(235, 212, 41, 0.9);
+ border-radius: 10px;
+ padding: 20px;
+ color: rgba(34, 31, 45, 0.9);
+ position: relative;
+ text-align: left;
+ box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+/* .ticket::before, .ticket::after {
+ content: '';
+ position: absolute;
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ z-index: 10;
+ background: linear-gradient(180deg, rgba(171,6,87,1) 0%, rgba(142,11,78,1) 2%, rgba(103,18,66,1) 7%, rgba(74,23,57,1) 17%, rgba(35,30,45,1) 54%, rgba(34,31,45,1) 100%);;
+ border: 5px solid transparent;
+               border-top-color: #fff;
+               border-right-color: #fff;
+               border-radius: 100%;
+}
+
+.ticket::before {
+ top: -21px;
+ left: 50%;
+ transform: translate(-50%) rotate(135deg);
+}
+
+.ticket::after {
+ bottom: -21px;
+ left: 50%;
+ transform: translateX(-50%) rotate(-45deg);
+} */
+
+.content {
+ position: relative;
+ z-index: 1;
+ display: flex;
+ flex-direction: column;
+}
+
+.eventName {
+ font-size: 24px;
+ margin: 0;
+}
+
+.eventDate, .eventLocation {
+ display: inline-flex;
+ align-items: center;
+ gap: 5px;
+ font-size: 18px;
+ margin: 10px 0;
+ text-align: left;
+ font-weight: 600;
+}

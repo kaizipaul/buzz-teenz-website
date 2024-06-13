@@ -2,3 +2,9 @@ footer {
  padding: 100px;
  background: black;
 }
+
+@media (max-width: 760px) {
+ footer {
+  padding: 50px 25px;
+ }
+}

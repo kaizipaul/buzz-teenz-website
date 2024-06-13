@@ -1,6 +1,6 @@
 // components/Card.js
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from 'next-view-transitions';
 import { FaLocationDot, FaClock } from "react-icons/fa6";
 
 const MainCard = ({ title, location, date, thumbnail, tag, link }) => {

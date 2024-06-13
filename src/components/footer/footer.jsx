@@ -4,10 +4,10 @@ export default function Footer () {
  const YEAR = new Date().getFullYear()
  return (
   <footer>
-   <div className='flex justify-between'>
+   <div className='flex flex-col gap-4 sm:flex-row justify-between'>
    <div>
     <p>
-     LOGO
+     [buzz teenz]
     </p>
     <p>
      © {YEAR} Buzz Group Africa.
