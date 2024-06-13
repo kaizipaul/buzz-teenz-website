@@ -4,7 +4,7 @@ import { FaBookOpen } from "react-icons/fa6";
 import { TbFileMusic } from "react-icons/tb";
 import { IoBulb } from "react-icons/io5";
 import MainCard from "@/components/eventcards/maincard";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { barlow_condensed } from "./fonts";
 
 export default function Home() {

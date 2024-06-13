@@ -1,10 +1,10 @@
-// app/blog/[id]/page.js
 "use client"
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { formatFullDateTime } from '@/app/helpers/convertDate';
 import { Separator } from "@/components/ui/separator";
 import fetchEvents from '@/app/helpers/fetchEvents';
+import Ticket from '@/components/eventticket/eventTicket';
 import { barlow_condensed } from '@/app/fonts';
 
 export default function BlogPost(props) {
@@ -20,7 +20,7 @@ export default function BlogPost(props) {
     }
   };
   getData();
- }, [])
+ }, [props.params.slug])
 
 
   return (
@@ -57,6 +57,13 @@ export default function BlogPost(props) {
               <p>{formatFullDateTime(item.attributes.createdAt)}</p>
               <p className='bg-black px-4 py-2 text-white rounded-full text-sm'>{item.attributes.tags}</p>
             </div>
+          </div>
+          <div className='w-[100%]'>
+            <Ticket
+            eventName={'The Finals'}
+            eventDate={'24 June 2024'}
+            eventLocation={'JNICC, Dar es Salaam'}
+            />
           </div>
           <Separator className='my-4' />
           </div>

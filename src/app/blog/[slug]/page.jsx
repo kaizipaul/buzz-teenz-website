@@ -1,4 +1,3 @@
-// app/blog/[id]/page.js
 "use client"
 import { useState, useEffect } from 'react';
 import fetchBlogPosts from '@/app/helpers/fetchBlogs';
@@ -68,3 +67,11 @@ export default function BlogPost(props) {
     </div>
   );
 }
+
+// export async function generateStaticParams() {
+//   const blog = await fetchBlogPosts().then((res) => res.json())
+ 
+//   return blog.map((post) => ({
+//     slug: post.attributes.slug,
+//   }))
+// }

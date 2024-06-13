@@ -20,9 +20,9 @@ export function formatFullDateTime(datetimeString) {
 }
 
 // Example usage:
-const datetimeString = "2024-06-12T15:30:00Z";
-const formattedDateTime = formatFullDateTime(datetimeString);
-console.log(formattedDateTime); // Output: "Wednesday, 12 June 2024, 15:30"
+// const datetimeString = "2024-06-12T15:30:00Z";
+// const formattedDateTime = formatFullDateTime(datetimeString);
+// console.log(formattedDateTime); // Output: "Wednesday, 12 June 2024, 15:30"
 
 export function formatDate(datetimeString) {
  // Create a new Date object from the input datetime string
@@ -44,6 +44,6 @@ export function formatDate(datetimeString) {
 }
 
 // Example usage:
-const formattedDate = formatDate(datetimeString);
-console.log(formattedDate); // Output: "12 June 2024"
+// const formattedDate = formatDate(datetimeString);
+// console.log(formattedDate); // Output: "12 June 2024"
 

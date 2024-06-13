@@ -77,7 +77,7 @@ export default function Events () {
        <h2>
          All Events.
        </h2>
-       <div className="grid grid-cols-4 grid-flow-row gap-2 text-left h-[400px]">
+       <div className="grid grid-rows-8 gap-4 h-[90%] sm:grid-cols-4 grid-flow-row text-left">
           {events.map(event => (
             <AllEventsCard 
             key={event.id}
