@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button"
 import { BiLinkExternal } from "react-icons/bi";
 import { FaBookOpen } from "react-icons/fa6";
@@ -6,8 +7,33 @@ import { IoBulb } from "react-icons/io5";
 import MainCard from "@/components/eventcards/maincard";
 import { Link } from "next-view-transitions";
 import { barlow_condensed } from "./fonts";
+import { useEffect, useState } from "react";
+import { fetchEvents } from "./helpers/requests";
 
 export default function Home() {
+  // const [hero, setHero] = useState ([]);
+  const [featuredHome, setFeaturedHome] = useState ([]);
+  const [events, setEvents] = useState([]);
+
+  useEffect (() => {
+    const getData = async () => {
+      try {
+        // const heroCard = await fetchHome()
+        const featured = await fetchEvents('filters[isFeatured][$eq]=true')
+        const nonFeatured = await fetchEvents('filters[isFeatured][$eq]=false')
+
+        // setHero(heroCard)
+        setFeaturedHome(featured)
+        setEvents(nonFeatured)
+      } catch (error) {
+        console.error('error fetching data', error);
+      }
+    }
+    getData();
+  }, [])
+
+  const nonFeaturedTop = events.slice(0, 2);
+
   return (
     <>
     <section className="hero-section flex">
@@ -62,34 +88,31 @@ export default function Home() {
         See what we’ve been cookin up,<br />
         and what’s to come.
         </h2>
-        <div className="grid grid-rows-4 h-[90%] sm:grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
+        <div className="grid grid-rows-4 h-[90%] gap-2 sm:grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
           <div className="row-span-2">
-          <MainCard
-            tag={'The Finals'}
-            title={'The Finals'}
-            location={'JNICC, Dar-es-Salaam'}
-            date={'19 June 2024, 1pm'}
-            link={'/events/the-finals'}
-            />
+          {featuredHome.map(featuredEvent => (
+              <MainCard
+              key={featuredEvent.id}
+              tag={featuredEvent.attributes.tags}
+              title={featuredEvent.attributes.title}
+              location={featuredEvent.attributes.location}
+              thumbnail={`http://localhost:1337${featuredEvent.attributes.coverimage.data.attributes.url}`}
+              link={`events/${featuredEvent.attributes.slug}`}
+              date={'19 June 2024, 1pm'}
+              />
+            ))}
           </div>
-          <div>
-          <MainCard
-            tag={'The Finals'}
-            title={'The Finals'}
-            location={'JNICC, Dar-es-Salaam'}
+          {nonFeaturedTop.map((event, index) => (
+            <MainCard
+            key={index}
+            tag={event.attributes.tags}
+            title={event.attributes.title}
+            location={event.attributes.location}
+            thumbnail={`http://localhost:1337${event.attributes.coverimage.data.attributes.url}`}
+            link={`events/${event.attributes.slug}`}
             date={'19 June 2024, 1pm'}
-            link={'/events/the-finals'}
             />
-          </div>
-          <div>
-          <MainCard
-            tag={'The Finals'}
-            title={'The Finals'}
-            location={'JNICC, Dar-es-Salaam'}
-            date={'19 June 2024, 1pm'}
-            link={'/events/the-finals'}
-            />
-            </div> 
+          ))}
         </div>
       </div>
     </section>

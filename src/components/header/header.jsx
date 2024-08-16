@@ -1,7 +1,9 @@
+'use client'
 import './header.css';
 import { Link } from 'next-view-transitions';
 import Image from 'next/image';
-import { RxHamburgerMenu } from "react-icons/rx";
+import { TfiMenu } from "react-icons/tfi";
+import { PiSquaresFour } from "react-icons/pi";
 import {
   Sheet,
   SheetContent,
@@ -26,10 +28,10 @@ export default function Header () {
      </Link>
      </h1>
     <nav>
-      <div className='bg-[#221F2D]/90 p-2 rounded-sm shadow-md text-lg sm:hidden'>
+      <div className='text-sm bg-[#1789FC] p-2 rounded-md shadow-md text-lg sm:hidden'>
       <Sheet>
         <SheetTrigger asChild>
-        <RxHamburgerMenu />
+        <TfiMenu className='w-6 h-6' />
         </SheetTrigger>
         <SheetContent side={'top'} className='bg-[#221F2D]/90 dark backdrop-blur-md h-[90%] flex flex-col items-center p-10'>
           <SheetHeader>
@@ -108,3 +110,7 @@ export default function Header () {
    </header>
   )
 }
+
+// TODOS
+// 1. Hamburger menu should have pink outline 
+// 2. Add ""

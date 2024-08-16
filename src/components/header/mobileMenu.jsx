@@ -1,23 +1,27 @@
-export default function mobileMenu () {
+// components/MobileMenu.js
+
+import styles from './MobileMenu.module.css';
+
+const MobileMenu = ({ isOpen, toggleMenu }) => {
   return (
-   <div>
-    <ul>
-     <li>
-      Home
-     </li>
-     <li>
-      About
-     </li>
-     <li>
-      Blog
-     </li>
-     <li>
-      Events
-     </li>
-     <li>
-      Vote
-     </li>
-    </ul>
-   </div>
-  )
-}
+    <>
+      {isOpen && (
+        <div className={styles.menu}>
+          <button className={styles.closeButton} onClick={toggleMenu}>
+            &times;
+          </button>
+          <div className={styles.logo}>superpower</div>
+          <div className={styles.links}>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href="#">Manifesto</a>
+            <a href="#">Log In</a>
+            <button className={styles.waitlistButton}>Join Waitlist</button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default MobileMenu;

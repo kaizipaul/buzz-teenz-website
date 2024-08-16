@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import AllEventsCard from '@/components/eventcards/allevents';
 import MainCard from '@/components/eventcards/maincard';
-import fetchEvents from '../helpers/fetchEvents';
+import { fetchEvents } from '../helpers/requests';
 import { formatDate } from '../helpers/convertDate';
 import { barlow_condensed } from '../fonts';
 
@@ -65,7 +65,7 @@ export default function Events () {
             tag={event.attributes.tags}
             title={event.attributes.title}
             location={event.attributes.location}
-            thumbnail={`${event.attributes.coverimage.data.attributes.url}`}
+            thumbnail={`http://localhost:1337${event.attributes.coverimage.data.attributes.url}`}
             link={`events/${event.attributes.slug}`}
             date={'19 June 2024, 1pm'}
             />
@@ -77,12 +77,12 @@ export default function Events () {
        <h2>
          All Events.
        </h2>
-       <div className="grid grid-rows-8 gap-4 h-[90%] sm:grid-cols-4 grid-flow-row text-left">
+       <div className="grid grid-rows-4 grid-flow-row gap-4 h-[60%] sm:grid-cols-4 grid-flow-row text-left">
           {events.map(event => (
             <AllEventsCard 
             key={event.id}
             name={event.attributes.title}
-            thumbnail={`${event.attributes.coverimage.data.attributes.url}`}
+            thumbnail={`http://localhost:1337${event.attributes.coverimage.data.attributes.url}`}
             location={event.attributes.location}
             date={formatDate(event.attributes.date)}
             tag={event.attributes.tags}

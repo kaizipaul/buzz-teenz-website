@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { formatFullDateTime } from '@/app/helpers/convertDate';
 import { Separator } from "@/components/ui/separator";
-import fetchEvents from '@/app/helpers/fetchEvents';
+import { fetchEvents } from '@/app/helpers/requests';
 import Ticket from '@/components/eventticket/eventTicket';
 import { barlow_condensed } from '@/app/fonts';
 
@@ -31,7 +31,7 @@ export default function BlogPost(props) {
           <div className='flex flex-col gap-4 items-start'>
           <div className='-z-10 w-[100%]'>
               <Image
-              src={`${item.attributes.coverimage.data.attributes.url}`} 
+              src={`http://localhost:1337${item.attributes.coverimage.data.attributes.url}`} 
               alt='cover-image'
               width={800}
               height={500}
@@ -45,7 +45,7 @@ export default function BlogPost(props) {
             </h1>
             <div className='inline-flex gap-2 items-center gap-4'>
             <Image
-              src={`${item.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
+              src={`http://localhost:1337${item.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
               alt='avatar'
               width={50}
               height={50}

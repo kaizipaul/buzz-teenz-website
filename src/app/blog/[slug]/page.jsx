@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react';
-import fetchBlogPosts from '@/app/helpers/fetchBlogs';
+import { fetchBlogPosts } from '@/app/helpers/requests';
 import { formatFullDateTime } from '@/app/helpers/convertDate';
 import { Separator } from "@/components/ui/separator"
 import Image from 'next/image';
@@ -28,7 +28,7 @@ export default function BlogPost(props) {
           <div key={post.id} className='flex flex-col items-start sm:gap-4'>
             <div className='-z-10 w-[100%]'>
               <Image 
-              src={`${post.attributes.thumbnail.data.attributes.url}`}
+              src={`http://localhost:1337${post.attributes.thumbnail.data.attributes.url}`}
               alt='cover-image'
               width={800}
               height={500}
@@ -42,7 +42,7 @@ export default function BlogPost(props) {
             </h1>
             <div className="inline-flex items-center gap-4">
               <Image
-              src={`${post.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
+              src={`http://localhost:1337${post.attributes.authors.data[0].attributes.avatar.data.attributes.url}`}
               alt='avatar'
               width={50}
               height={50}

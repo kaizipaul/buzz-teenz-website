@@ -1,4 +1,3 @@
-
 "use client"
 import { Link } from 'next-view-transitions';
 import { barlow_condensed } from '../fonts';
@@ -15,18 +14,23 @@ export default function Vote () {
 
   return (
     <section className="hero-section flex">
-    <div className="hero-card flex">
-      <h1 className={barlow_condensed.className}>
-        JOIN IN THE BUZZ <br />
-        VOTE NOW
-      </h1>
-      <p>
-      Lorem ipsum dolor sit amet stet. Ea consectetuer ipsum nonumy rebum autem consequat sit erat gubergren facilisis sit nibh magna.
-      </p>
-      <Button onClick={startVoting}>
-          Vote Now
-      </Button>
-    </div>
-  </section>
+      <div className="hero-card flex">
+        <h1 className={barlow_condensed.className}>
+          JOIN IN THE BUZZ <br />
+          VOTE NOW
+        </h1>
+        <p>
+        Lorem ipsum dolor sit amet stet. Ea consectetuer ipsum nonumy rebum autem consequat sit erat gubergren facilisis sit nibh magna.
+        </p>
+        <Button onClick={startVoting}>
+          Start Voting
+        </Button>
+      </div>
+    </section>
   )
 };
+
+// TODOS
+// 1. Set up supabase as voting backend, it should receive a form for at least 5 nominees per cat
+// 2. Navigate to form that users can fill per category
+// 
