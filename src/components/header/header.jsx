@@ -1,116 +1,51 @@
 'use client'
+import { useState } from 'react';
 import './header.css';
-import { Link } from 'next-view-transitions';
+import Link from 'next/link';
 import Image from 'next/image';
 import { TfiMenu } from "react-icons/tfi";
-import { PiSquaresFour } from "react-icons/pi";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
+import MobileMenu from './mobileMenu';
 
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-export default function Header () {
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const navItems = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/events', label: 'Events' },
+    { href: '/vote', label: 'Vote' },
+  ];
+
+  const renderNavItems = () => (
+    <ul className='hidden sm:flex'>
+      {navItems.map(({ href, label }) => (
+        <li key={href}>
+          <Link href={href}>{label}</Link>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
-   <header>
-    <h1>
-     <Link href="/">
-     <Image
-     src={'/Buzz.png'}
-     alt={'logo'}
-     height={100}
-     width={100}
-     />
-     </Link>
-     </h1>
-    <nav>
-      <div className='text-sm bg-[#1789FC] p-2 rounded-md shadow-md text-lg sm:hidden'>
-      <Sheet>
-        <SheetTrigger asChild>
-        <TfiMenu className='w-6 h-6' />
-        </SheetTrigger>
-        <SheetContent side={'top'} className='bg-[#221F2D]/90 dark backdrop-blur-md h-[90%] flex flex-col items-center p-10'>
-          <SheetHeader>
-              <Image
-              src={'/Buzz.png'}
-              alt='logo'
-              height={125}
-              width={150}
-              />
-            <SheetDescription className='p-10'>
-              <ul className='flex flex-col gap-4 text-xl'>
-                <li>
-                  <SheetTrigger asChild>
-                  <Link href="/">
-                    Home
-                  </Link>
-                  </SheetTrigger>
-                </li>
-                <li>
-                  <SheetTrigger asChild>
-                  <Link href="/about">
-                  About
-                  </Link>
-                  </SheetTrigger>
-                </li>
-                <li>
-                  <SheetTrigger asChild>
-                  <Link href="/blog">
-                  Blog
-                  </Link>
-                  </SheetTrigger>
-                </li>
-                <li>
-                  <SheetTrigger asChild>
-                  <Link href="/events">
-                  Events
-                  </Link>
-                  </SheetTrigger>
-                </li>
-                <li>
-                <SheetTrigger asChild>
-                  <Link href="/vote">
-                  Vote
-                  </Link>
-                  </SheetTrigger>
-                </li>
-              </ul>
-            </SheetDescription>
-          </SheetHeader>
-        </SheetContent>
-</Sheet>
-      </div>
-     <ul className='hidden sm:flex'>
-      <li>
-       <Link href="/about">
-       About
-       </Link>
-      </li>
-      <li>
-       <Link href="/blog">
-        Blog
-       </Link>
-      </li>
-      <li>
-        <Link href="/events">
-        Events
+    <header>
+      <h1>
+        <Link href="/">
+          <Image src="/Buzz.png" alt="logo" height={100} width={100} />
         </Link>
-      </li>
-      <li>
-       <Link href="/vote">
-        Vote
-       </Link>
-      </li>
-     </ul>
-    </nav>
-   </header>
-  )
+      </h1>
+      <nav>
+        <div 
+          className="text-sm bg-slate-700 p-2 rounded-md shadow-md text-lg sm:hidden cursor-pointer"
+          onClick={toggleMenu}
+        >
+          <TfiMenu className="w-6 h-6" />
+        </div>
+        {renderNavItems()}
+      </nav>
+      <MobileMenu isOpen={isMenuOpen} toggleMenu={toggleMenu} />
+    </header>
+  );
 }
-
-// TODOS
-// 1. Hamburger menu should have pink outline 
-// 2. Add ""

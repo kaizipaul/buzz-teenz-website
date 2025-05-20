@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { IoIosWarning } from "react-icons/io";
 import { IoCheckmarkCircle } from "react-icons/io5";

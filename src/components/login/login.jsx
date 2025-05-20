@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link } from "next-view-transitions";
+import Link from 'next/link';
 import {
   Card,
   CardContent,

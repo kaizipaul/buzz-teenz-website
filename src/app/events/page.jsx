@@ -1,97 +1,126 @@
 "use client"
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import AllEventsCard from '@/components/eventcards/allevents';
 import MainCard from '@/components/eventcards/maincard';
 import { fetchEvents } from '../helpers/requests';
 import { formatDate } from '../helpers/convertDate';
 import { barlow_condensed } from '../fonts';
+import { Button } from "@/components/ui/button";
+import { Toaster, toast } from 'react-hot-toast';
 
+const EVENTS_PER_PAGE = 4;
 
-export default function Events () {
-  const [featuredEvents, setFeaturedEvents] = useState([]);
-  const [events, setEvents] = useState([]);
+// Skeleton loader for main cards
+const MainCardSkeleton = () => (
+  <div className="animate-pulse bg-gray-200 h-full w-full rounded-lg"></div>
+);
+
+// Skeleton loader for smaller event cards
+const EventCardSkeleton = () => (
+  <div className="animate-pulse bg-gray-200 h-64 w-full rounded-lg"></div>
+);
+
+export default function Events() {
+  const [eventData, setEventData] = useState({ featured: [], nonFeatured: [] });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
+      setIsLoading(true);
       try {
-        const featured = await fetchEvents('filters[isFeatured][$eq]=true');
-        const nonFeatured = await fetchEvents('filters[isFeatured][$eq]=false');
-        
-        setFeaturedEvents(featured);
-        setEvents(nonFeatured);
+        const [featured, nonFeatured] = await Promise.all([
+          fetchEvents('filters[isFeatured][$eq]=true'),
+          fetchEvents('filters[isFeatured][$eq]=false')
+        ]);
+        setEventData({ featured, nonFeatured });
       } catch (error) {
         console.error('Error fetching data:', error);
+        toast.error('Failed to fetch events. Please try again later.');
+      } finally {
+        setIsLoading(false);
       }
     };
-  
     getData();
-  }, [])
+  }, []);
 
-  const nonFeaturedTop = events.slice(0, 2);
+  const renderEvent = useCallback((event, isFeatured = false) => {
+    const Component = isFeatured ? MainCard : AllEventsCard;
+    const { attributes } = event;
+    return (
+      <Component
+        key={event.id}
+        tag={attributes.tags}
+        title={attributes.title}
+        location={attributes.location}
+        thumbnail={`http://localhost:1337${attributes.coverimage.data.attributes.url}`}
+        link={`events/${attributes.slug}`}
+        date={formatDate(attributes.date)}
+        name={attributes.title}
+      />
+    );
+  }, []);
+
+  const { featured, nonFeatured } = eventData;
+  const pageCount = Math.ceil(nonFeatured.length / EVENTS_PER_PAGE);
+  const paginatedEvents = nonFeatured.slice(
+    (currentPage - 1) * EVENTS_PER_PAGE,
+    currentPage * EVENTS_PER_PAGE
+  );
 
   return (
     <>
-    <section>
-     <div className="flex flex-col gap-4 sm:gap-8 items-center">
-      <h2>
-       Events.
-      </h2>
-      <h1 className={barlow_condensed.className} >
-       FOLLOW THE BUZZ
-      </h1>
-      <p>
-      Lorem ipsum dolor sit amet eos commodo labore dolores.
-      </p>
-     </div>
-    </section>
-    <section>
-    <div className="grid grid-rows-4 h-[90%] text-left sm:grid-rows-2 grid-flow-col gap-2 h-[400px]">
+      <Toaster position="top-center" reverseOrder={false} />
+      <section className="flex flex-col gap-4 sm:gap-8 items-center">
+        <h2>Events</h2>
+        <h1 className={barlow_condensed.className}>FOLLOW THE BUZZ</h1>
+        <p>Lorem ipsum dolor sit amet eos commodo labore dolores.</p>
+      </section>
+      <section>
+        <div className="grid grid-rows-4 sm:grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
           <div className="row-span-2">
-            {featuredEvents.map(featuredEvent => (
-              <MainCard
-              key={featuredEvent.id}
-              tag={featuredEvent.attributes.tags}
-              title={featuredEvent.attributes.title}
-              location={featuredEvent.attributes.location}
-              thumbnail={`${featuredEvent.attributes.coverimage.data.attributes.url}`}
-              link={`events/${featuredEvent.attributes.slug}`}
-              date={'19 June 2024, 1pm'}
-              />
-            ))}
-            </div>
-          {nonFeaturedTop.map((event, index) => (
-            <MainCard
-            key={index}
-            tag={event.attributes.tags}
-            title={event.attributes.title}
-            location={event.attributes.location}
-            thumbnail={`http://localhost:1337${event.attributes.coverimage.data.attributes.url}`}
-            link={`events/${event.attributes.slug}`}
-            date={'19 June 2024, 1pm'}
-            />
-          ))}
+            {isLoading ? <MainCardSkeleton /> : featured.map(event => renderEvent(event, true))}
+          </div>
+          {isLoading 
+            ? Array(2).fill().map((_, index) => <MainCardSkeleton key={index} />)
+            : nonFeatured.slice(0, 2).map(event => renderEvent(event, true))}
         </div>
-    </section>
-    <section>
-     <div className='flex flex-col gap-8'>
-       <h2>
-         All Events.
-       </h2>
-       <div className="grid grid-rows-4 grid-flow-row gap-4 h-[60%] sm:grid-cols-4 grid-flow-row text-left">
-          {events.map(event => (
-            <AllEventsCard 
-            key={event.id}
-            name={event.attributes.title}
-            thumbnail={`http://localhost:1337${event.attributes.coverimage.data.attributes.url}`}
-            location={event.attributes.location}
-            date={formatDate(event.attributes.date)}
-            tag={event.attributes.tags}
-            link={`events/${event.attributes.slug}`}
-            />
-          ))}
+      </section>
+      <section className="flex flex-col gap-8">
+        <h2>All Events</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-left">
+          {isLoading
+            ? Array(EVENTS_PER_PAGE).fill().map((_, index) => <EventCardSkeleton key={index} />)
+            : paginatedEvents.map(event => renderEvent(event))}
         </div>
-     </div>
-    </section>
+        {!isLoading && (
+          <PaginationControls
+            currentPage={currentPage}
+            pageCount={pageCount}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
+      </section>
     </>
-  )
-};
+  );
+}
+
+const PaginationControls = ({ currentPage, pageCount, setCurrentPage }) => (
+  <div className="flex justify-center gap-2 mt-4">
+    <Button
+      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+      disabled={currentPage === 1}
+    >
+      Previous
+    </Button>
+    <span className="self-center">
+      Page {currentPage} of {pageCount}
+    </span>
+    <Button
+      onClick={() => setCurrentPage(prev => Math.min(prev + 1, pageCount))}
+      disabled={currentPage === pageCount}
+    >
+      Next
+    </Button>
+  </div>
+);

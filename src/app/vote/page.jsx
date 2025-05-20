@@ -1,5 +1,4 @@
 "use client"
-import { Link } from 'next-view-transitions';
 import { barlow_condensed } from '../fonts';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
@@ -30,7 +29,3 @@ export default function Vote () {
   )
 };
 
-// TODOS
-// 1. Set up supabase as voting backend, it should receive a form for at least 5 nominees per cat
-// 2. Navigate to form that users can fill per category
-// 

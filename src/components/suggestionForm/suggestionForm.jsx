@@ -4,36 +4,27 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { Button } from "../ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "react-hot-toast"; // Add this import
 
 const SuggestionForm = ({ categoryId, categories }) => {
   const router = useRouter();
   const [suggestion, setSuggestion] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [suggestionError, setSuggestionError] = useState(null);
-  const [suggestionLoading, setSuggestionLoading] = useState(false);
-  const [submissionError, setSubmissionError] = useState(null);
-  const [submissionSuccess, setSubmissionSuccess] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSuggestionChange = (e) => {
-    setSuggestion(e.target.value);
-  };
+  const handleSuggestionChange = (e) => setSuggestion(e.target.value);
 
   const handleAddSuggestion = () => {
-    if (suggestions.length < 3 && suggestion.trim() !== "") {
-      setSuggestions([...suggestions, suggestion]);
+    if (suggestions.length < 3 && suggestion.trim()) {
+      setSuggestions([...suggestions, suggestion.trim()]);
       setSuggestion("");
     } else if (suggestions.length >= 3) {
-      setSuggestionError("You can only add up to 3 suggestions.");
+      toast.error("You can only add up to 3 suggestions.");
     }
   };
 
-  console.log(suggestion);
-
   const handleSuggestionSubmit = async () => {
-    setSuggestionLoading(true);
-    setSubmissionError(null);
-    setSubmissionSuccess(null);
-
+    setIsSubmitting(true);
     try {
       const { error } = await supabase.from("suggestions").insert(
         suggestions.map((suggestion) => ({
@@ -42,24 +33,20 @@ const SuggestionForm = ({ categoryId, categories }) => {
         }))
       );
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
-      setSubmissionSuccess("Suggestions submitted successfully.");
+      toast.success("Suggestions submitted successfully.");
       setSuggestions([]);
 
-      const nextCategoryIndex =
-        categories.findIndex((cat) => cat.id === parseInt(categoryId)) + 1;
-      if (nextCategoryIndex < categories.length) {
-        router.push(`/vote/${categories[nextCategoryIndex].id}`);
-      } else {
-        router.push("/thank-you");
-      }
+      const nextCategoryIndex = categories.findIndex((cat) => cat.id === parseInt(categoryId)) + 1;
+      router.push(nextCategoryIndex < categories.length 
+        ? `/vote/${categories[nextCategoryIndex].id}`
+        : "/thank-you"
+      );
     } catch (error) {
-      setSubmissionError(error.message);
+      toast.error(error.message);
     } finally {
-      setSuggestionLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -88,18 +75,13 @@ const SuggestionForm = ({ categoryId, categories }) => {
           <li className="bg-[#221F2D] p-2 rounded-md text-white w-fit" key={index}>{suggestion}</li>
         ))}
       </ul>
-      {suggestionLoading && <p>Submitting your suggestions...</p>}
-      {submissionError && <p style={{ color: "red" }}>{submissionError}</p>}
-      {submissionSuccess && (
-        <p style={{ color: "green" }}>{submissionSuccess}</p>
-      )}
       <div className="flex justify-end absolute bottom-0 right-0">
         <Button
           className="bg-[#AB0758]"
           onClick={handleSuggestionSubmit}
-          disabled={suggestionLoading || suggestions.length === 0}
+          disabled={isSubmitting || suggestions.length === 0}
         >
-          Next Category
+          {isSubmitting ? "Submitting..." : "Next Category"}
         </Button>
       </div>
     </div>
@@ -108,7 +90,3 @@ const SuggestionForm = ({ categoryId, categories }) => {
 
 export default SuggestionForm;
 
-// TODOS
-// 1. Add toast for states ie submitting, errors, etc
-// 2. Add loaders and spinners to loading states
-// 3. Add progress tracker as the form moves forward

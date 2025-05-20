@@ -7,10 +7,12 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
     <>
       {isOpen && (
         <div className={styles.menu}>
-          <button className={styles.closeButton} onClick={toggleMenu}>
-            &times;
-          </button>
-          <div className={styles.logo}>superpower</div>
+          <div className='flex justify-between items-center'>
+            <button className={styles.closeButton} onClick={toggleMenu}>
+              &times;
+            </button>
+            <div className={styles.logo}>buzz teenz</div>
+          </div>
           <div className={styles.links}>
             <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
             <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>

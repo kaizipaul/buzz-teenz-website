@@ -1,4 +1,4 @@
-import { Barlow_Condensed, Inter, Montserrat, Roboto_Mono } from 'next/font/google'
+import { Barlow_Condensed, Inter, Montserrat } from 'next/font/google'
  
 export const inter = Inter({
   subsets: ['latin'],

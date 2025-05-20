@@ -5,18 +5,21 @@ import { FaBookOpen } from "react-icons/fa6";
 import { TbFileMusic } from "react-icons/tb";
 import { IoBulb } from "react-icons/io5";
 import MainCard from "@/components/eventcards/maincard";
-import { Link } from "next-view-transitions";
 import { barlow_condensed } from "./fonts";
 import { useEffect, useState } from "react";
 import { fetchEvents } from "./helpers/requests";
+import { formatDate } from "./helpers/convertDate";
+import Link from 'next/link'
 
 export default function Home() {
   // const [hero, setHero] = useState ([]);
   const [featuredHome, setFeaturedHome] = useState ([]);
   const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect (() => {
     const getData = async () => {
+      setIsLoading(true);
       try {
         // const heroCard = await fetchHome()
         const featured = await fetchEvents('filters[isFeatured][$eq]=true')
@@ -27,6 +30,8 @@ export default function Home() {
         setEvents(nonFeatured)
       } catch (error) {
         console.error('error fetching data', error);
+      } finally {
+        setIsLoading(false);
       }
     }
     getData();
@@ -46,10 +51,10 @@ export default function Home() {
         Lorem ipsum dolor sit amet stet. Ea consectetuer ipsum nonumy rebum autem consequat sit erat gubergren facilisis sit nibh magna.
         </p>
         <Button className="bg-pink-600 mt-10">
-          <Link href='/blog'>
+          <Link href="/blog">
             Read Our Blog
           </Link>
-        <BiLinkExternal className="ml-2" />
+          <BiLinkExternal className="ml-2" />
         </Button>
       </div>
     </section>
@@ -88,31 +93,43 @@ export default function Home() {
         See what we’ve been cookin up,<br />
         and what’s to come.
         </h2>
-        <div className="grid grid-rows-4 h-[90%] gap-2 sm:grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
-          <div className="row-span-2">
-          {featuredHome.map(featuredEvent => (
-              <MainCard
-              key={featuredEvent.id}
-              tag={featuredEvent.attributes.tags}
-              title={featuredEvent.attributes.title}
-              location={featuredEvent.attributes.location}
-              thumbnail={`http://localhost:1337${featuredEvent.attributes.coverimage.data.attributes.url}`}
-              link={`events/${featuredEvent.attributes.slug}`}
-              date={'19 June 2024, 1pm'}
-              />
-            ))}
-          </div>
-          {nonFeaturedTop.map((event, index) => (
-            <MainCard
-            key={index}
-            tag={event.attributes.tags}
-            title={event.attributes.title}
-            location={event.attributes.location}
-            thumbnail={`http://localhost:1337${event.attributes.coverimage.data.attributes.url}`}
-            link={`events/${event.attributes.slug}`}
-            date={'19 June 2024, 1pm'}
-            />
-          ))}
+        <div className="grid grid-rows-4 sm:grid-rows-2 grid-flow-col gap-2 h-[400px] text-left">
+          {isLoading ? (
+            <>
+              <div className="row-span-2">
+                <SkeletonCard />
+              </div>
+              <SkeletonCard />
+              <SkeletonCard />
+            </>
+          ) : (
+            <>
+              <div className="row-span-2">
+                {featuredHome.length > 0 && (
+                  <MainCard
+                    key={featuredHome[0].id}
+                    tag={featuredHome[0].attributes.tags}
+                    title={featuredHome[0].attributes.title}
+                    location={featuredHome[0].attributes.location}
+                    thumbnail={`${process.env.NEXT_PUBLIC_STRAPI_URL}${featuredHome[0].attributes.coverimage.data.attributes.url}`}
+                    link={`events/${featuredHome[0].attributes.slug}`}
+                    date={formatDate(featuredHome[0].attributes.date)}
+                  />
+                )}
+              </div>
+              {nonFeaturedTop.slice(0, 2).map((event) => (
+                <MainCard
+                  key={event.id}
+                  tag={event.attributes.tags}
+                  title={event.attributes.title}
+                  location={event.attributes.location}
+                  thumbnail={`${process.env.NEXT_PUBLIC_STRAPI_URL}${event.attributes.coverimage.data.attributes.url}`}
+                  link={`events/${event.attributes.slug}`}
+                  date={formatDate(event.attributes.date)}
+                />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </section>
@@ -121,7 +138,7 @@ export default function Home() {
         <h2>
           Our Sponsors.
         </h2>
-        <div class="grid grid-rows-4 grid-flow-col gap-2 h-[400px]">
+        <div className="grid grid-rows-4 grid-flow-col gap-2 h-[400px]">
           <div className="border-solid border-2"></div>
           <div className="border-solid border-2"></div>
           <div className="border-solid border-2"></div>
@@ -142,5 +159,18 @@ export default function Home() {
       </div>
     </section>
     </>
+  );
+}
+
+function SkeletonCard() {
+  return (
+    <div className="animate-pulse bg-gray-200 rounded-lg h-full w-full">
+      <div className="h-3/4 bg-gray-300 rounded-t-lg"></div>
+      <div className="p-4">
+        <div className="h-4 bg-gray-300 rounded w-1/4 mb-2"></div>
+        <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
+        <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+      </div>
+    </div>
   );
 }
